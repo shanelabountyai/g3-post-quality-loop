@@ -1,0 +1,65 @@
+[project]
+name = "g3-post-quality-loop"
+version = "0.1.0"
+description = "Post Quality Loop, code version (G3·C): a Writer and a Critic in an evaluator-optimizer loop with a hard pass cap, attached to the shared capability layer (G0)."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+dependencies = [
+    # The shared layer, pinned to G0 main after g0-shared-layer PR #1 merged, as G2·C does (D-6).
+    # Move the pin to the v0.1.0 tag once the owner tags g0-shared-layer.
+    "g0-shared-layer @ git+https://github.com/shanelabountyai/g0-shared-layer@6f5e605f8b485afa95f1cbef73911057b8b4dec5",
+    "claude-agent-sdk>=0.2.170,<0.3",
+    "pydantic>=2.11,<3",
+    "anyio>=4",
+]
+
+[project.scripts]
+post-loop = "post_loop.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "jsonschema>=4.23",
+    "ruff>=0.8",
+    "mypy>=1.13",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/post_loop"]
+
+[tool.hatch.metadata]
+allow-direct-references = true  # the G0 git pin above
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 160
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+
+[tool.mypy]
+python_version = "3.12"
+files = ["src"]
+strict = true
+ignore_missing_imports = true
+plugins = ["pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = ["claude_agent_sdk.*"]
+follow_imports = "skip"
+
+[tool.uv]
+required-version = ">=0.5"
+
+[tool.ruff.lint.per-file-ignores]
+"fixtures/make_fixtures.py" = ["E501", "E701", "E702", "E401", "I001"]

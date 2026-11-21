@@ -1,0 +1,71 @@
+{
+  "$defs": {
+    "CriticScores": {
+      "additionalProperties": false,
+      "properties": {
+        "claims": {
+          "description": "1\u20135: every factual claim is in the source note or the claims registry.",
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Claims",
+          "type": "integer"
+        },
+        "brand": {
+          "description": "1\u20135: the post follows the shared brand policy.",
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Brand",
+          "type": "integer"
+        },
+        "hook": {
+          "description": "1\u20135: the first line gives a reason to keep reading.",
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Hook",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "claims",
+        "brand",
+        "hook"
+      ],
+      "title": "CriticScores",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "pass": {
+      "description": "The Critic's own overall verdict.",
+      "title": "Pass",
+      "type": "boolean"
+    },
+    "scores": {
+      "$ref": "#/$defs/CriticScores"
+    },
+    "fixes": {
+      "description": "Concrete changes for the Writer; at least one when pass is false.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Fixes",
+      "type": "array"
+    },
+    "unsupported_claims": {
+      "description": "Claims the Critic could not trace to the source.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Unsupported Claims",
+      "type": "array"
+    }
+  },
+  "required": [
+    "pass",
+    "scores",
+    "fixes"
+  ],
+  "title": "CriticVerdict",
+  "type": "object"
+}

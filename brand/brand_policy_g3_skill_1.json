@@ -1,0 +1,17 @@
+{
+  "_about": "Brand policy version g3-skill-1 (D-4). A delta on G0 brand policy v1, seeded from the owner's linkedin-personal-brand-shane skill (Non-Negotiable Rules, Task 1 format rules and hard avoids). Only rules G0 v1 does not already hold are here; every draft is checked against v1 AND this version. The skill's personal guardrails (employer, career record, job search) are deliberately not copied into this public file. Loaded into G0's brand store through G0's own seed loader; rule ids are namespaced g3.",
+  "policy_version": "g3-skill-1",
+  "source": "linkedin-personal-brand-shane skill (owner's), read 2026-11-21",
+  "text": "LinkedIn posts in Shane's voice: warm, grounded, specific over general, experience first and experiment second. Hook in lines 1-2; never open with 'I'm excited to announce', 'I've been thinking a lot about' or 'Humbled to share'. Outcomes over tenure: lead with numbers and moments, never '20+ years'. No engagement bait. 150-300 words, up to 500 for a strong story. Never: 'I came across your profile and was impressed', 'I'm a big fan of your work', 'Let's connect!'.",
+  "channels": ["linkedin", "email", "digest", "post_angle", "other"],
+  "rules": [
+    {"id": "g3.never_use.excited_to_announce", "kind": "phrase", "pattern": "excited to announce", "channels": ["*"], "severity": "fail", "fix": "Cut the announcement opener; drop straight into the moment or the number."},
+    {"id": "g3.opener.been_thinking_a_lot", "kind": "regex", "pattern": "\\bi[’']?ve been thinking a lot about\\b", "channels": ["*"], "severity": "fail", "fix": "Start with the thing you saw or ran, not with the fact you thought about it."},
+    {"id": "g3.never_use.came_across_your_profile", "kind": "phrase", "pattern": "came across your profile", "channels": ["*"], "severity": "fail", "fix": "Open with the specific thing about them that prompted this."},
+    {"id": "g3.never_use.big_fan_of_your_work", "kind": "phrase", "pattern": "big fan of your work", "channels": ["*"], "severity": "fail", "fix": "Name the specific piece of their work instead."},
+    {"id": "g3.never_use.lets_connect", "kind": "regex", "pattern": "\\blet[’']?s connect\\b", "channels": ["*"], "severity": "fail", "fix": "End with a genuine question or a specific reason to talk."},
+    {"id": "g3.engagement_bait.if_you_agree", "kind": "regex", "pattern": "\\b(?:drop|comment|like|share)\\b[^.!?\\n]{0,30}\\bif you agree\\b", "channels": ["*"], "severity": "fail", "fix": "Ask a real question peers can answer."},
+    {"id": "g3.tenure.years_plus", "kind": "regex", "pattern": "\\b\\d{2}\\+\\s*years\\b", "channels": ["linkedin"], "severity": "fail", "fix": "Lead with an outcome (a number or a moment), not tenure."},
+    {"id": "g3.linkedin.max_500_words", "kind": "max_words", "limit": 500, "channels": ["linkedin"], "severity": "fail", "fix": "Cut to 300 words (500 only for a strong personal story)."}
+  ]
+}
