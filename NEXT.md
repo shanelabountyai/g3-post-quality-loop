@@ -29,6 +29,6 @@ Order: G1 -> G0 (shared layer) -> G2 -> G3 -> G4 -> G5 (see ../README.md). If G0
 **You:**
 1. Review the draft PR and the four provisional decisions (D-2..D-5); say which to change.
 2. Check `brand/brand_policy_g3_skill_1.json` against your skill — add or cut rules you want enforced.
-3. When you want real numbers: put `ANTHROPIC_API_KEY` in a gitignored `.env`, export it, and run `uv run post-loop --note g3-post-loop --live` once (≈ 6 model calls at most; G0's $10 run cap applies). Then a live `post-loop eval --live` would need new live cases — the fixture cases replay recorded keys.
+3. When you want real numbers: put `ANTHROPIC_API_KEY` in a gitignored `.env`, export it, and run `uv run post-loop --note g3-post-loop --live` once (≈ 6 model calls at most; G0's $10 run cap applies). Then `uv run post-loop eval --live --report docs/eval-report-live.md` runs all 9 fixture inputs live (at most 27 Critic + 27 Writer calls) and gives the first measured passes-to-pass and cap-hit rate; the `expect` outcomes in `fixtures/cases.json` only apply to the recorded path.
 4. Merge the PR yourself when satisfied (no one else will), then tag G0 `v0.1.0` if you want the pin moved off the SHA.
 5. Build G3·B in n8n by hand from `docs/prd.md` and the same rubric/fixtures.
