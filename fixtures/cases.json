@@ -1,0 +1,115 @@
+{
+  "_about": "G3 test data (D-14): source notes summarising real entries of this build log (facts from the g0/g1/g2 repos' READMEs and decision logs, and this repo's PRD), deliberately weak drafts, one draft with an unsupported claim, and one malformed-Critic case. `expect` is the outcome the recorded responses are written to produce; tests assert it. No client, testimonial or business result appears anywhere.",
+  "notes": {
+    "g0-shared-layer": {
+      "title": "G0 Shared Capability Layer",
+      "text": "Build log G0, Shared Capability Layer. Six capabilities every agent in the track needs (claims.registry, brand.policy, audience.consent, measurement, evaluation, observability) now live behind one MCP server with versioned contracts. 157 tests run without network or a model call. A breaking contract change fails the contract tests until the version is bumped. G1's own count: 16 integrations before the layer, 8 after; 24 copies of the 8 shared rules before, 8 after."
+    },
+    "g1-signal-scout": {
+      "title": "G1 Weekly Signal Scout",
+      "text": "Build log G1, Weekly Signal Scout. Four agents in sequence (Researcher, Summarizer, Editor, Writer) read 15 RSS feeds and produce a weekly digest of items worth posting about. Built twice: n8n first, then Python with the Claude Agent SDK. The n8n version carried every shared rule in every agent's prompt; the duplication log counted 7 rules carried by more than one agent. A seen-items table makes sure a re-run never repeats an item, and items are marked seen only after the digest is written."
+    },
+    "g2-lead-triage": {
+      "title": "G2 Lead Triage Crew",
+      "text": "Build log G2, Lead Triage Crew. An orchestrator decides which specialists to call for each new lead: an Enricher, a Qualifier and a Drafter. The follow-up email is left as a draft. It never sends anything: a PreToolUse hook denies anything shaped like a send, and the HubSpot interface has no send method. All leads are synthetic. Six bands decide what happens to a lead, one rule each, in one function."
+    },
+    "g3-post-loop": {
+      "title": "G3 Post Quality Loop",
+      "text": "Build log G3, Post Quality Loop. A Writer drafts a LinkedIn post, a Critic scores it against a rubric, and the loop repeats until the post passes or hits a cap of 3 passes. Hitting the cap flags the draft for human review instead of shipping a best effort. A malformed Critic response is caught by schema validation, not passed through."
+    },
+    "rule-duplication": {
+      "title": "Why rules moved out of prompts",
+      "text": "Build log note. In G1's n8n build the brand voice rule was pasted into 2 agents and the claim rule into 4. When a rule changed, every copy had to change, and a missed copy meant two agents disagreeing about what good looks like. Moving the rules into the shared layer left one copy of each."
+    },
+    "cost-logging": {
+      "title": "Cost logging across the track",
+      "text": "Build log note. Every model call in the track is logged with its tokens and cost against a $10 cap per run. Logging is never refused, so an overrun is visible instead of hidden. The cap is checked before a model judge is called."
+    }
+  },
+  "cases": [
+    {
+      "id": "g0-pass-first",
+      "note": "g0-shared-layer",
+      "expect": {
+        "passed": true,
+        "passes": 1
+      },
+      "about": "Strong first draft; passes on pass 1."
+    },
+    {
+      "id": "g1-hook-fix",
+      "note": "g1-signal-scout",
+      "expect": {
+        "passed": true,
+        "passes": 2
+      },
+      "about": "First draft has a weak hook; the revision fixes it and passes on pass 2."
+    },
+    {
+      "id": "g2-brand-fix",
+      "note": "g2-lead-triage",
+      "expect": {
+        "passed": true,
+        "passes": 2
+      },
+      "about": "First draft breaks G0 brand policy v1 ('excited to share', emoji); the revision passes on pass 2."
+    },
+    {
+      "id": "g3-third-pass",
+      "note": "g3-post-loop",
+      "expect": {
+        "passed": true,
+        "passes": 3
+      },
+      "about": "Pass 1 weak hook; pass 2 trips the skill-seeded opener rule (g3-skill-1) that G0 v1 does not hold; passes on pass 3."
+    },
+    {
+      "id": "weak-draft-improves",
+      "note": "rule-duplication",
+      "expect": {
+        "passed": true,
+        "passes": 3
+      },
+      "about": "Deliberately weak supplied draft (banned opener, 'game changer', 'Let's connect!'); scores rise each pass and it passes on pass 3 (AC 1).",
+      "start_draft": "I've been thinking a lot about AI agents lately. They are a game changer for marketing teams everywhere. Let's connect!"
+    },
+    {
+      "id": "weak-draft-cap",
+      "note": "cost-logging",
+      "expect": {
+        "passed": false,
+        "passes": 3
+      },
+      "about": "Deliberately weak supplied draft (tenure opener, engagement bait); revisions never reach a 4/5 hook, so the cap is hit and the draft is flagged for human review (AC 4).",
+      "start_draft": "With 20+ years in marketing, I know cost matters. Every call is logged. Drop a like if you agree."
+    },
+    {
+      "id": "unsupported-claim",
+      "note": "g2-lead-triage",
+      "expect": {
+        "passed": false,
+        "passes": 3
+      },
+      "about": "Supplied draft carries an unsupported claim (a registry stat with the wrong number, and a result not in the source). The Writer keeps it; on pass 2 the recorded Critic wrongly says pass. G0's claims checks overrule it every time, so it never passes and is flagged (AC 3, D-10).",
+      "start_draft": "95% of organizations now use AI in at least one function, and my lead triage crew cut triage time by 73%.\n\nAn orchestrator calls an Enricher, a Qualifier and a Drafter for each new lead. It never sends anything.\n\nIs your team there yet?\n\n#aiagents #marketingops"
+    },
+    {
+      "id": "malformed-critic",
+      "note": "g1-signal-scout",
+      "expect": {
+        "passed": true,
+        "passes": 3
+      },
+      "about": "Pass 1 Critic returns prose instead of JSON; pass 2 returns JSON that fails the schema (a fail with no fixes, a score of 7). Both are caught and fail closed; the same draft is re-critiqued and passes on pass 3 (AC 5, D-12)."
+    },
+    {
+      "id": "topic-pass-cap",
+      "topic": "What a hard pass cap teaches an agent",
+      "expect": {
+        "passed": true,
+        "passes": 1
+      },
+      "about": "Topic-only input, as `post-loop \"What a hard pass cap teaches an agent\"`. The topic is the only source, so the draft carries no numbers."
+    }
+  ]
+}

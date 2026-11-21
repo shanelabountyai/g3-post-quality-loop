@@ -1,0 +1,18 @@
+{
+  "_about": "G3 rubric for a LinkedIn post (D-7, D-8). Seeded into G0's rubric store through G0's own loader; scored by G0's evaluation capability (DeterministicJudge + decide()). The item is an object the loop assembles from G0 results and the Critic's hook score: {post, claims_registry, claims_in_source, brand, hook_score}. Criteria are the PRD rubric: claims verified, on-brand, has a hook (4 or more out of 5).",
+  "rubrics": [
+    {
+      "id": "g3_linkedin_post_v1",
+      "title": "LinkedIn post: claims verified, on-brand, has a hook",
+      "source": "g3-post-quality-loop docs/prd.md rubric; build-log card",
+      "pass_threshold": 0.8,
+      "criteria": [
+        {"id": "claims_registry_clear", "weight": 1, "required": true, "description": "No claim in the post is `unsupported` by the shared claims registry.", "check": "field_in:claims_registry:clear"},
+        {"id": "claims_in_source", "weight": 1, "required": true, "description": "Every number, URL and quote in the post appears in the source note (G0 rubric claim_rule_v1).", "check": "field_in:claims_in_source:pass"},
+        {"id": "on_brand", "weight": 1, "required": true, "description": "No violation of brand policy v1 or g3-skill-1 on channel linkedin.", "check": "field_in:brand:pass"},
+        {"id": "has_hook", "weight": 1, "required": true, "description": "The first line gives a reason to keep reading: the Critic scores the hook 4 or more out of 5.", "check": "field_in:hook_score:4,5"},
+        {"id": "no_hype", "weight": 1, "required": false, "description": "No hype words from the shared hype list.", "check": "no_hype_words"}
+      ]
+    }
+  ]
+}

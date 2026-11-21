@@ -1,0 +1,265 @@
+{
+  "_about": "Hand-written responses in each agent's output shape, keyed <agent>:<case>:<pass>. NOT a recording of a live model (D-9): no API key was used and no model was called. Writer entries are {post}; Critic entries are the Critic JSON, or a raw string to exercise schema validation. A first live run with --record replaces this file.",
+  "responses": {
+    "writer:g0-pass-first:1": {
+      "post": "Three agents, six tools each, and the same brand rule pasted into every prompt. That was the plan I threw out.\n\nIn G0 the six capabilities every agent needs now sit behind one MCP server with versioned contracts. A breaking contract change fails the contract tests until the version is bumped, so nobody changes a shape by accident.\n\nThe count that sold me: 16 integrations before the layer, 8 after. 24 copies of the shared rules down to 8.\n\nAnd 157 tests run without network or a model call.\n\nWhere do your shared rules live today: in one place, or in every prompt?\n\n#marketingops #aiagents #buildinpublic"
+    },
+    "critic:g0-pass-first:1": {
+      "pass": true,
+      "scores": {
+        "claims": 5,
+        "brand": 5,
+        "hook": 4
+      },
+      "fixes": []
+    },
+    "writer:g1-hook-fix:1": {
+      "post": "This week I worked on a weekly digest project.\n\nFour agents in sequence (Researcher, Summarizer, Editor, Writer) read 15 RSS feeds and pick items worth posting about. I built it twice: n8n first, then Python with the Claude Agent SDK.\n\nThe n8n version carried every shared rule in every prompt.\n\nWhat would you build first?\n\n#marketingops #aiagents #n8n"
+    },
+    "critic:g1-hook-fix:1": {
+      "pass": false,
+      "scores": {
+        "claims": 5,
+        "brand": 4,
+        "hook": 2
+      },
+      "fixes": [
+        "The first line is a status update, not a reason to keep reading. Open with the duplication finding."
+      ]
+    },
+    "writer:g1-hook-fix:2": {
+      "post": "7 rules were carried by more than one agent. I only found out because I built the same scout twice.\n\nFour agents in sequence (Researcher, Summarizer, Editor, Writer) read 15 RSS feeds and produce a weekly digest. The n8n version carried every shared rule in every prompt; the duplication log made the cost visible.\n\nThe second build, in Python with the Claude Agent SDK, keeps one copy of each rule.\n\nOne detail I'd keep in any agent: items are marked seen only after the digest is written, so a failed run never silently drops anything.\n\nHave you ever counted how many prompts carry the same rule?\n\n#marketingops #aiagents #n8n"
+    },
+    "critic:g1-hook-fix:2": {
+      "pass": true,
+      "scores": {
+        "claims": 5,
+        "brand": 5,
+        "hook": 5
+      },
+      "fixes": []
+    },
+    "writer:g2-brand-fix:1": {
+      "post": "Excited to share my latest build 🚀\n\nAn orchestrator decides which specialists to call for each new lead: an Enricher, a Qualifier and a Drafter. The follow-up email is left as a draft.\n\nIt never sends anything.\n\nWhat guardrails do you put on agents?\n\n#marketingops #aiagents #hubspot"
+    },
+    "critic:g2-brand-fix:1": {
+      "pass": false,
+      "scores": {
+        "claims": 5,
+        "brand": 1,
+        "hook": 2
+      },
+      "fixes": [
+        "Remove 'Excited to share' and the emoji.",
+        "Open with the guarantee: it never sends anything, enforced by the system."
+      ]
+    },
+    "writer:g2-brand-fix:2": {
+      "post": "My lead triage crew cannot send an email. Not \"is told not to\". Cannot.\n\nAn orchestrator decides which specialists to call for each new lead: an Enricher, a Qualifier and a Drafter. The follow-up email is left as a draft.\n\nA PreToolUse hook denies anything shaped like a send, and the HubSpot interface has no send method. A prompt is a promise; an interface without the method is a guarantee.\n\nSix bands decide what happens to a lead, one rule each, in one function. All leads are synthetic.\n\nWhere do you enforce your agent guardrails: in the prompt or in the system?\n\n#marketingops #aiagents #hubspot"
+    },
+    "critic:g2-brand-fix:2": {
+      "pass": true,
+      "scores": {
+        "claims": 5,
+        "brand": 5,
+        "hook": 5
+      },
+      "fixes": []
+    },
+    "writer:g3-third-pass:1": {
+      "post": "Here is an overview of the G3 build.\n\nA Writer drafts a LinkedIn post, a Critic scores it against a rubric, and the loop repeats until the post passes or hits a cap.\n\nThoughts?\n\n#aiagents #marketingops #buildinpublic"
+    },
+    "critic:g3-third-pass:1": {
+      "pass": false,
+      "scores": {
+        "claims": 5,
+        "brand": 4,
+        "hook": 2
+      },
+      "fixes": [
+        "Weak hook: lead with the cap and what happens when it is hit."
+      ]
+    },
+    "writer:g3-third-pass:2": {
+      "post": "I've been thinking a lot about when an agent should stop.\n\nA Writer drafts a LinkedIn post, a Critic scores it against a rubric, and the loop repeats until the post passes or hits a cap of 3 passes.\n\nHitting the cap flags the draft for human review.\n\nWhen should your agents stop?\n\n#aiagents #marketingops #buildinpublic"
+    },
+    "critic:g3-third-pass:2": {
+      "pass": false,
+      "scores": {
+        "claims": 5,
+        "brand": 3,
+        "hook": 4
+      },
+      "fixes": [
+        "The opener is a banned pattern; start with the moment, not the thinking."
+      ]
+    },
+    "writer:g3-third-pass:3": {
+      "post": "My agent gets 3 tries. On the fourth, a human gets the draft.\n\nA Writer drafts a LinkedIn post, a Critic scores it against a rubric, and the loop repeats until the post passes or hits a cap of 3 passes.\n\nHitting the cap flags the draft for human review instead of shipping a best effort. That flag is the feature, not the failure.\n\nAnd a malformed Critic response is caught by schema validation, not passed through as a pass.\n\nWhat's your agent's stop condition?\n\n#aiagents #marketingops #buildinpublic"
+    },
+    "critic:g3-third-pass:3": {
+      "pass": true,
+      "scores": {
+        "claims": 5,
+        "brand": 5,
+        "hook": 4
+      },
+      "fixes": []
+    },
+    "critic:weak-draft-improves:1": {
+      "pass": false,
+      "scores": {
+        "claims": 5,
+        "brand": 1,
+        "hook": 1
+      },
+      "fixes": [
+        "Remove the banned opener, 'game changer' and 'Let's connect!'.",
+        "Use the note: the brand rule was pasted into 2 agents and the claim rule into 4."
+      ]
+    },
+    "writer:weak-draft-improves:2": {
+      "post": "Some thoughts on agent rules.\n\nIn one build the brand voice rule was pasted into 2 agents and the claim rule into 4. When a rule changed, every copy had to change.\n\nMoving the rules into the shared layer left one copy of each.\n\nHow do you manage this?\n\n#aiagents #marketingops"
+    },
+    "critic:weak-draft-improves:2": {
+      "pass": false,
+      "scores": {
+        "claims": 5,
+        "brand": 5,
+        "hook": 3
+      },
+      "fixes": [
+        "The hook is generic. Lead with the cost of a missed copy."
+      ]
+    },
+    "writer:weak-draft-improves:3": {
+      "post": "A missed copy of one rule meant two of my agents disagreed about what good looks like.\n\nIn G1's n8n build the brand voice rule was pasted into 2 agents and the claim rule into 4. When a rule changed, every copy had to change.\n\nMoving the rules into the shared layer left one copy of each. Now a change is one commit, and every agent reads the same answer.\n\nHow many copies of your brand rules exist right now?\n\n#aiagents #marketingops #buildinpublic"
+    },
+    "critic:weak-draft-improves:3": {
+      "pass": true,
+      "scores": {
+        "claims": 5,
+        "brand": 5,
+        "hook": 4
+      },
+      "fixes": []
+    },
+    "critic:weak-draft-cap:1": {
+      "pass": false,
+      "scores": {
+        "claims": 5,
+        "brand": 1,
+        "hook": 1
+      },
+      "fixes": [
+        "Lead with an outcome, not tenure.",
+        "Remove the engagement bait."
+      ]
+    },
+    "writer:weak-draft-cap:2": {
+      "post": "Cost matters in AI projects.\n\nEvery model call in the track is logged with its tokens and cost against a $10 cap per run.\n\nWhat do you think?\n\n#aiagents"
+    },
+    "critic:weak-draft-cap:2": {
+      "pass": false,
+      "scores": {
+        "claims": 5,
+        "brand": 5,
+        "hook": 2
+      },
+      "fixes": [
+        "The hook is a truism. Lead with what happens on an overrun."
+      ]
+    },
+    "writer:weak-draft-cap:3": {
+      "post": "Logging matters.\n\nEvery model call in the track is logged with its tokens and cost against a $10 cap per run. Logging is never refused, so an overrun is visible instead of hidden.\n\nWhat do you think?\n\n#aiagents"
+    },
+    "critic:weak-draft-cap:3": {
+      "pass": false,
+      "scores": {
+        "claims": 5,
+        "brand": 5,
+        "hook": 3
+      },
+      "fixes": [
+        "Still no reason to keep reading in line one."
+      ]
+    },
+    "critic:unsupported-claim:1": {
+      "pass": false,
+      "scores": {
+        "claims": 2,
+        "brand": 5,
+        "hook": 4
+      },
+      "fixes": [
+        "Source the 73% or remove it; it is not in the note."
+      ],
+      "unsupported_claims": [
+        "my lead triage crew cut triage time by 73%"
+      ]
+    },
+    "writer:unsupported-claim:2": {
+      "post": "95% of organizations now use AI in at least one function, and my lead triage crew cut triage time by 73%.\n\nAn orchestrator decides which specialists to call for each new lead: an Enricher, a Qualifier and a Drafter. It never sends anything.\n\nIs your team there yet?\n\n#aiagents #marketingops"
+    },
+    "critic:unsupported-claim:2": {
+      "pass": true,
+      "scores": {
+        "claims": 5,
+        "brand": 5,
+        "hook": 4
+      },
+      "fixes": []
+    },
+    "writer:unsupported-claim:3": {
+      "post": "My lead triage crew cut triage time by 73%, and 95% of organizations now use AI in at least one function.\n\nAn orchestrator decides which specialists to call for each new lead. The follow-up email is left as a draft.\n\nIs your team there yet?\n\n#aiagents #marketingops"
+    },
+    "critic:unsupported-claim:3": {
+      "pass": false,
+      "scores": {
+        "claims": 2,
+        "brand": 5,
+        "hook": 4
+      },
+      "fixes": [
+        "The 73% is still unsourced."
+      ],
+      "unsupported_claims": [
+        "my lead triage crew cut triage time by 73%"
+      ]
+    },
+    "writer:malformed-critic:1": {
+      "post": "Items are marked seen only after the digest is written. That one ordering rule is why a failed run never loses anything.\n\nMy weekly scout runs four agents in sequence (Researcher, Summarizer, Editor, Writer) over 15 RSS feeds. A seen-items table makes sure a re-run never repeats an item.\n\nMark too early and a crash silently drops the week. Mark after the write and the worst case is a repeat you can see.\n\nWhere does your pipeline mark work as done?\n\n#aiagents #marketingops #n8n"
+    },
+    "critic:malformed-critic:1": "Looks good to me! The hook is strong and the claims match the note. I'd ship it.",
+    "critic:malformed-critic:2": {
+      "pass": false,
+      "scores": {
+        "claims": 5,
+        "brand": 5,
+        "hook": 7
+      },
+      "fixes": []
+    },
+    "critic:malformed-critic:3": {
+      "pass": true,
+      "scores": {
+        "claims": 5,
+        "brand": 5,
+        "hook": 5
+      },
+      "fixes": []
+    },
+    "writer:topic-pass-cap:1": {
+      "post": "A loop without a stop condition isn't an agent. It's a bill.\n\nWhen a Writer and a Critic go back and forth, the question isn't whether the next draft is better. It's who decides when to stop, and what happens then.\n\nA hard pass cap answers both. The agent gets a fixed number of tries, and when it runs out, a person gets the draft with a clear flag instead of a quiet best effort.\n\nWhat's the stop condition on the agents you run?\n\n#aiagents #marketingops"
+    },
+    "critic:topic-pass-cap:1": {
+      "pass": true,
+      "scores": {
+        "claims": 5,
+        "brand": 5,
+        "hook": 4
+      },
+      "fixes": []
+    }
+  }
+}
