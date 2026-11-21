@@ -40,7 +40,7 @@ testpaths = ["tests"]
 addopts = "-q"
 
 [tool.ruff]
-line-length = 140
+line-length = 160
 target-version = "py312"
 src = ["src", "tests"]
 
@@ -55,8 +55,11 @@ ignore_missing_imports = true
 plugins = ["pydantic.mypy"]
 
 [[tool.mypy.overrides]]
-module = ["shared_layer.*", "claude_agent_sdk.*"]
+module = ["claude_agent_sdk.*"]
 follow_imports = "skip"
 
 [tool.uv]
 required-version = ">=0.5"
+
+[tool.ruff.lint.per-file-ignores]
+"fixtures/make_fixtures.py" = ["E501", "E701", "E702", "E401", "I001"]

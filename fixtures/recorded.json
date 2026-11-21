@@ -55,7 +55,7 @@
       ]
     },
     "writer:g2-brand-fix:2": {
-      "post": "My lead triage crew cannot send an email. Not \"is told not to\". Cannot.\n\nAn orchestrator decides which specialists to call for each new lead: an Enricher, a Qualifier and a Drafter. The follow-up email is left as a draft.\n\nA PreToolUse hook denies anything shaped like a send, and the HubSpot interface has no send method. A prompt is a promise; an interface without the method is a guarantee.\n\nSix bands decide what happens to a lead, one rule each, in one function. All leads are synthetic.\n\nWhere do you enforce your agent guardrails: in the prompt or in the system?\n\n#marketingops #aiagents #hubspot"
+      "post": "My lead triage crew cannot send an email. Not told not to. Cannot.\n\nAn orchestrator decides which specialists to call for each new lead: an Enricher, a Qualifier and a Drafter. The follow-up email is left as a draft.\n\nA PreToolUse hook denies anything shaped like a send, and the HubSpot interface has no send method. A prompt is a promise; an interface without the method is a guarantee.\n\nSix bands decide what happens to a lead, one rule each, in one function. All leads are synthetic.\n\nWhere do you enforce your agent guardrails: in the prompt or in the system?\n\n#marketingops #aiagents #hubspot"
     },
     "critic:g2-brand-fix:2": {
       "pass": true,

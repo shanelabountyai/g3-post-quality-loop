@@ -5,6 +5,7 @@ from __future__ import annotations
 import pytest
 
 from post_loop.fixtures import load_cases
+from post_loop.layer import LayerDegraded
 from post_loop.llm import RecordedCaller
 from post_loop.loop import PostLoop, PostLoopError
 
@@ -118,6 +119,6 @@ def test_degraded_layer_stops_before_any_model_call(layer):
     with layer.db.conn:
         layer.db.conn.execute("DELETE FROM rubrics WHERE id = 'g3_linkedin_post_v1'")
     caller = RecordedCaller()
-    with pytest.raises(Exception):
+    with pytest.raises(LayerDegraded):
         _run(layer, "g0-pass-first", caller=caller)
     assert sum(caller.calls.values()) == 0
