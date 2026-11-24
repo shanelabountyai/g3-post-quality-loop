@@ -1,5 +1,39 @@
 # NEXT
 
+## 2026-11-24 — Pre-live portfolio pack (branch `portfolio-pack/2026-11-24`, draft PR, docs only)
+
+**State:** `main` = `a51a5ab` (PR #1 merged 2026-11-20 CT). **Not deployed. No live model call has ever been made.** This pack adds docs only; no code, test, fixture, recording, rubric, schema, brand policy, config, CI or generated report changed. Decisions D-18 to D-23 added. The 2026-11-21 section below is kept as written; its "nothing is merged" line is now out of date (PR #1 is merged).
+
+**Done:**
+- Gate re-run, same steps as CI → `docs/GATE-2026-11-24.md`.
+- `docs/DEMO.md` — At a glance block plus a 10-stop recorded-path walk-through.
+- Exec brief, private Claude Docs: [G3·C Post Quality Loop in Brief](https://claude.ai/artifact/CFfJ1t9Asd8MV9evAEAbPr) (not shared).
+- `docs/COST.md` — measured figures only (D-21).
+- `docs/LINKEDIN_DRAFTS.md` — two drafts on D-10 and D-12, "Drafted, unposted".
+- `docs/RELEASE_NOTES.md` — "Not deployed — portfolio pack 2026-11-24".
+
+**Verified, and how (2026-11-24, fresh sandbox, recorded path, no `--live`):**
+- `uv sync --frozen` exit 0 · `uv run ruff check .` exit 0, all checks passed · `uv run mypy` exit 0, no issues in 10 source files · `uv run pytest` exit 0, 79 passed · `post-loop eval` as `ci.yml` runs it, exit 0: 9 cases, avg passes to pass 2.14, cap-hit rate 2 of 9 (**hand-written recorded responses, not a model**); report body identical to the committed `docs/eval-report.md`.
+- DEMO stops 1–9 run as commands (exit codes 0, 0, 0, 1, 2, 2, 0, 0 as documented) and tied to named tests.
+- Both LinkedIn drafts pass the loop's own brand gate (G0 v1 + `g3-skill-1`), checked with a script kept outside the repo (D-22).
+- Every build commit listed in the release notes is on `main` (`git merge-base --is-ancestor`).
+
+**Not verified:**
+- Any live model run, real tokens, cost per post, passes-to-pass or cap-hit rate.
+- Build cost (not recorded anywhere).
+- G0's price table against Anthropic's pricing page.
+- DEMO stop 10 (live run); the `--live` refusal was checked by tests only, not from the command line.
+- Whether the drafts sound like you; whether the brief reads right to a hiring lead.
+
+**Doc fixes that would need a code change:** none found.
+
+**You:**
+1. Review the draft PR for `portfolio-pack/2026-11-24`; it is on hold until you do. Merge it yourself if you're happy.
+2. Walk through `docs/DEMO.md` stops 1–9 on your machine.
+3. Read the brief (link above) and decide whether to share it.
+4. Edit the two drafts in `docs/LINKEDIN_DRAFTS.md` into your own words before posting anything.
+5. When you want real numbers, do the one live run (2026-11-21 "You:" step 3 below), then update `docs/COST.md` and the brief with what it measured.
+
 State (2026-11-04): PRD only (`docs/prd.md`, v0.1). No code, no git repo yet.
 
 Next: owner creates the repo if wanted, then pastes `KICKOFF.md` into Claude Code. The session plans first and stops for review.
